@@ -1,2 +1,4 @@
 class Configuration(object):
-    debug = True
+    DEBUG = True
+    SQLALCHEMY_DATABASE_URI = 'postgres://flask_blog:flask_blog@localhost/blog'
+
