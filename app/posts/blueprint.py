@@ -23,4 +23,4 @@ def post_detail(slug):
 def tag_detail(slug):
     l_tag = Tag.query.filter(Tag.slug == slug).first()
     l_posts = l_tag.posts.all()
-    return render_template('posts/tag_detail.html', posts=l_posts, tag=l_tag)
+    return render_template('posts/tag_detail.html', tag=l_tag, posts=l_posts)

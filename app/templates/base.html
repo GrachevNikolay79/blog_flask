@@ -49,8 +49,10 @@
                     <a class="nav-link disabled">Disabled</a>
                 </li>
             </ul>
-            <form class="d-flex">
-                <input aria-label="Search" class="form-control me-2" placeholder="Search" type="search">
+            <!--- SEARCH ---->
+            <form class="d-flex" method="GET">
+                <input aria-label="Search" class="form-control me-2" placeholder="Search"
+                       type="search" name="q" value="{{ request.args.get('q','') }}">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>

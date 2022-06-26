@@ -10,10 +10,13 @@
 
 {%block content%}
     <div class="tags">
-        {% for t in tags %}
-        <span class="badge bg-primary">{{ t.name }}</span>
+        {% for tag in tags %}
+        <a href="{{url_for('posts.tag_detail', slug=tag.slug)}}">
+            <span class="badge bg-primary">{{ tag.name }}</span>
+        </a>
         {% endfor %}
     </div>
+
     <div class="main-content">
         {{post.body}}
     </div>
