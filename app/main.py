@@ -12,3 +12,8 @@ if __name__ == '__main__':
     # db.create_all()
     # print('db created?')
     app.run()
+
+# миграции БД
+# flask db init
+# flask db migrate
+# flask db upgrade
