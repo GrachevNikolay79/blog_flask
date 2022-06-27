@@ -1,3 +1,3 @@
 # Учебный проект "**Блог на _Flask_**"
 
-Flask + SQLAlchemy + PostgreSQL
+Flask + SQLAlchemy + PostgreSQL + Bootstrap
