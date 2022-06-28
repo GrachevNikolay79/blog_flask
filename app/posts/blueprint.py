@@ -28,6 +28,19 @@ def create_post():
     return render_template('posts/create_post.html', form=form)
 
 
+@posts.route('/<slug>/edit', methods=['POST', 'GET'])
+def edit_post(slug):
+    post = Post.query.filter(Post.slug == slug).first()
+
+    if request.method == 'POST':
+        form = PostForm(formdata=request.form, obj=post)
+        form.populate_obj(post)
+        db.session.commit()
+        return redirect(url_for('posts.post_detail', slug=post.slug))
+
+    form = PostForm(obj=post)
+    return render_template('posts/edit_post.html', post=post, form=form)
+
 @posts.route('/')
 def index():
     q = request.args.get('q')
@@ -38,9 +51,9 @@ def index():
         page = 1
 
     if q:
-        l_posts = Post.query.filter(Post.title.contains(q) | Post.body.contains(q)) # .all()
+        l_posts = Post.query.filter(Post.title.contains(q) | Post.body.contains(q))  # .all()
     else:
-        l_posts = Post.query.order_by(Post.id) #(Post.created.desc()) # .all()
+        l_posts = Post.query.order_by(Post.id)  # (Post.created.desc()) # .all()
 
     pages = l_posts.paginate(page=page, per_page=5)
     return render_template('posts/index.html', posts=l_posts, pages=pages)
