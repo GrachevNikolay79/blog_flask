@@ -31,11 +31,19 @@ def create_post():
 @posts.route('/')
 def index():
     q = request.args.get('q')
-    if q:
-        l_posts = Post.query.filter(Post.title.contains(q) | Post.body.contains(q)).all()
+    page = request.args.get('page')
+    if page and page.isdigit():
+        page = int(page)
     else:
-        l_posts = Post.query.all()
-    return render_template('posts/index.html', posts=l_posts)
+        page = 1
+
+    if q:
+        l_posts = Post.query.filter(Post.title.contains(q) | Post.body.contains(q)) # .all()
+    else:
+        l_posts = Post.query.order_by(Post.id) #(Post.created.desc()) # .all()
+
+    pages = l_posts.paginate(page=page, per_page=5)
+    return render_template('posts/index.html', posts=l_posts, pages=pages)
 
 
 # http://localhost/blog/firs-post
